@@ -1,7 +1,9 @@
 package screenmatch.principal;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import screenmatch.modelos.Titulo;
-
+import screenmatch.modelos.TituloOMDB;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -29,8 +31,12 @@ public class PrincipalComBusca {
         String json = response.body();
         System.out.println(json);
 
-        Gson gson = new Gson();
-        Titulo meuTitulo = gson.fromJson(json, Titulo.class);
-        System.out.println(meuTitulo);
+
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                .create();
+        TituloOMDB meuTituloOMDB = gson.fromJson(json, TituloOMDB.class);
+        System.out.println(meuTituloOMDB);
+        Titulo meuTitulo = new Titulo(meuTituloOMDB);
     }
 }
