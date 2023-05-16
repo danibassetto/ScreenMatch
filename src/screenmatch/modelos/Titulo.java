@@ -1,5 +1,4 @@
 package screenmatch.modelos;
-
 import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo> {
@@ -15,6 +14,10 @@ public class Titulo implements Comparable<Titulo> {
         this.nome = meuTituloOMDB.title();
         this.anoDeLancamento = Integer.valueOf(meuTituloOMDB.year());
         this.duracaoEmMinutos = Integer.valueOf(meuTituloOMDB.runtime().substring(0, 2));
+    }
+
+    public Titulo(String nome, int anoDeLancamento) {
+
     }
 
     public String getNome() {
