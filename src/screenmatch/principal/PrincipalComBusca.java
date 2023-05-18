@@ -19,7 +19,7 @@ public class PrincipalComBusca {
         var busca = leitura.nextLine();
 
         String endereco = "https://www.omdbapi.com/?t=" + busca + "&apikey=4bb96a85";
-
+    try{
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(endereco))
@@ -37,6 +37,19 @@ public class PrincipalComBusca {
                 .create();
         TituloOMDB meuTituloOMDB = gson.fromJson(json, TituloOMDB.class);
         System.out.println(meuTituloOMDB);
-        Titulo meuTitulo = new Titulo(meuTituloOMDB);
+
+        //try{
+            Titulo meuTitulo = new Titulo(meuTituloOMDB);
+            System.out.println("Título já convertido");
+            System.out.println(meuTitulo);
+        }catch (NumberFormatException e){
+            System.out.println("Aconteceu um erro: " + e.getMessage());
+        }catch (IllegalArgumentException e){
+            System.out.println("Verifique o endereço: " + e.getMessage());
+        }catch (Exception e){
+            System.out.println("Erro genérico");
+        }
+
+        System.out.println("O programa finalizou corretamente!");
     }
 }
